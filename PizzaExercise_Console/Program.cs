@@ -12,36 +12,39 @@ namespace PizzaExercise_Console
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         static string filepath = Directory.GetCurrentDirectory() + "/pizzas.json";
-        static string downloadFromPath = "https://www.olo.com/pizzass.json";
+        static string downloadFromPath = "https://www.olo.com/pizzas.json";
         static void Main(string[] args)
         {
 
             PizzaRepo repo = new PizzaRepo();
-
-            //1. Download Json file from url
-            bool isDownloadSuccessfull = JsonHelper.DownloadFromUrl(downloadFromPath, filepath);
-
-
-            //2.GetTop20ToppingFromJsonData
+            
             try
             {
+                //1. Download Json file from url
+                JsonHelper.DownloadFromUrl(downloadFromPath, filepath);
+
+                //2.GetTop20ToppingFromJsonData
                 IList<ToppingsCombination> result = repo.GetTopTwentyToppingCombination(filepath);
+
                 //3.Print the results
-                if(result!=null &&result.Count>0)
-                foreach (ToppingsCombination item in result)
-                {
-                    Console.WriteLine(item.ToString());
-                }
+                if (result != null && result.Count > 0)
+                    foreach (ToppingsCombination item in result)
+                    {
+                        Console.WriteLine(item.ToString());
+                    }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                logger.Fatal($"url:{downloadFromPath} isDownloadSuccessfull:{isDownloadSuccessfull}");
+                logger.Fatal($"Download fail from url:{downloadFromPath}");
                 Console.WriteLine("Download fail for Json file");
             }
 
-            //3.exit
-            logger.Info("Application terminated. Press <enter> to exit...");
-            Console.ReadLine();
+            //4.exit
+            finally
+            {
+                logger.Info("Application terminated. Press <enter> to exit...");
+                Console.ReadLine();
+            }
 
         }
     }

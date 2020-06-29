@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,22 +15,19 @@ namespace PizzaExercise_Console.Utility
         /// </summary>
         /// <param name="url">url for the downloadable file</param>
         /// <param name="toPath">physical path to store file</param>
-        /// <returns>true if download is successfull.</returns>
-        public static bool DownloadFromUrl(string url, string toPath)
+        public static void DownloadFromUrl(string url, string toPath)
         {
-            bool downloadsuccess = false;
             //download file 
             try
             {
                 WebClient webClient = new WebClient();
                 webClient.DownloadFile(url, toPath);
-                downloadsuccess = true;
             }
             catch (WebException ex)
             {
-                Console.WriteLine($"Message:{ex.Message}:\n1.Make sure your internet is on and url is correct.\n2.Make sure Physical FilePath is correct and have write permission");
-            }
-            return downloadsuccess;
+                Console.WriteLine("1.Make sure your internet is on and url is correct.\n2.Make sure Physical FilePath is correct and have write permission");
+                LogManager.GetCurrentClassLogger().Fatal($"Message:{ex.Message}");               
+            }            
         }
 
         /// <summary>
@@ -52,7 +50,8 @@ namespace PizzaExercise_Console.Utility
             }
             catch (Exception e)
             {
-                Console.WriteLine("File read failed: check for read permission on File");
+                LogManager.GetCurrentClassLogger().Error($"ordersList.Count:{ordersList.Count}");
+                LogManager.GetCurrentClassLogger().Error(e.Message);
             }
             return ordersList;
         }
