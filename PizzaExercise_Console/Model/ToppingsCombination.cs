@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace PizzaExercise_Console.Model
@@ -20,8 +17,8 @@ namespace PizzaExercise_Console.Model
             StringBuilder toppingCombination = new StringBuilder();
             foreach (string t in Toppings)
                 toppingCombination.Append(t + " ");
-            return ($"{toppingCombination.ToString()} || {AppearedInOrderCount} || {Rank} ");
+            return ($"Rank:{Rank} Toppings:[{string.Join(",", Toppings)}]  Ordered:{AppearedInOrderCount} times");
         }
-            
+
     }
 }

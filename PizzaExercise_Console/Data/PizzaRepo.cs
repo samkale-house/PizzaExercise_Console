@@ -1,9 +1,7 @@
 ﻿using PizzaExercise_Console.Model;
 using PizzaExercise_Console.Utility;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PizzaExercise_Console.Data
 {
@@ -23,16 +21,16 @@ namespace PizzaExercise_Console.Data
 
         //Find different Topping combinations and it's frequency 
         //Dictionary:key is ToppingCombination, value is frequency
-        public Dictionary<Order,int> GetDifferentToppingCombinations(IList<Order> toppingDetailsForAllOrder)
-        {           
-           
-            
+        public Dictionary<Order, int> GetDifferentToppingCombinations(IList<Order> toppingDetailsForAllOrder)
+        {
+
+
             Dictionary<Order, int> dictToppingPerOrder = new Dictionary<Order, int>();
             foreach (var obj in toppingDetailsForAllOrder)
             {
                 if (!dictToppingPerOrder.TryAdd(obj, 1))
                 {
-                    //edit the topping combinations' frequency
+                    //edit the toppingcombinations' frequency
                     dictToppingPerOrder[obj] += 1;
                 }
 
@@ -40,13 +38,14 @@ namespace PizzaExercise_Console.Data
             return dictToppingPerOrder;
 
         }
-        public IList<ToppingsCombination> GetTopTwentyToppingsCombination(string filepath)
+        public IList<ToppingsCombination> GetTopTwentyToppingCombination(string filepath)
         {
-            
+
 
             //save data from json file into collection
-            var toppingDetailsForAllOrder = GetAllDataFromJson(filepath);
-            var differentToppingCombinations = GetDifferentToppingCombinations(toppingDetailsForAllOrder);
+            IList<Order> toppingDetailsForAllOrder = GetAllDataFromJson(filepath);
+
+            Dictionary<Order, int> differentToppingCombinations = toppingDetailsForAllOrder.Count > 0 ? GetDifferentToppingCombinations(toppingDetailsForAllOrder) : null;
 
             //create top20 list and returnlist or print
             IList<ToppingsCombination> top20ToppingCombinations = new List<ToppingsCombination>();

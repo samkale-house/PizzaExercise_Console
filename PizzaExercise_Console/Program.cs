@@ -4,9 +4,6 @@ using PizzaExercise_Console.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 
 namespace PizzaExercise_Console
 {
@@ -16,7 +13,7 @@ namespace PizzaExercise_Console
         static string downloadFromPath = "https://www.olo.com/pizzas.json";
         static void Main(string[] args)
         {
-            
+
             PizzaRepo repo = new PizzaRepo();
 
             //1. Download Json file from url
@@ -26,7 +23,7 @@ namespace PizzaExercise_Console
             //2.GetTop20ToppingFromJsonData
             if (isDownloadSuccessfull)
             {
-                IList<ToppingsCombination> result = repo.GetTopTwentyToppingsCombination(filepath);
+                IList<ToppingsCombination> result = repo.GetTopTwentyToppingCombination(filepath);
                 //3.Print the results
                 foreach (ToppingsCombination item in result)
                 {

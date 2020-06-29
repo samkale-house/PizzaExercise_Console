@@ -1,7 +1,5 @@
 ﻿using PizzaExercise_Console.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PizzaExercise_Console.Utility
 {
@@ -27,7 +25,6 @@ namespace PizzaExercise_Console.Utility
                     });
                     rank += 1;
                 }
-
 
             }
             return toppingCombinations;

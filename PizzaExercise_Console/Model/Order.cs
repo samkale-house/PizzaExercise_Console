@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 
 namespace PizzaExercise_Console
 {
@@ -11,7 +8,7 @@ namespace PizzaExercise_Console
     /// This class represents one order from incoming Json data.
     /// It implements IEquatable to compare two orders based on its topping list
     /// </summary>
-    
+
     public class Order : IEquatable<Order>
     {
         public List<string> Toppings { get; set; }
@@ -23,7 +20,7 @@ namespace PizzaExercise_Console
 
         public bool Equals(Order other)
         {
-            return other != null && 
+            return other != null &&
                 Enumerable.SequenceEqual(this.Toppings.OrderBy(t => t), other.Toppings.OrderBy(t => t));
         }
 
