@@ -1,4 +1,5 @@
-﻿using PizzaExercise_Console.Data;
+﻿using NLog;
+using PizzaExercise_Console.Data;
 using PizzaExercise_Console.Model;
 using PizzaExercise_Console.Utility;
 using System;
@@ -9,8 +10,9 @@ namespace PizzaExercise_Console
 {
     class Program
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         static string filepath = Directory.GetCurrentDirectory() + "/pizzas.json";
-        static string downloadFromPath = "https://www.olo.com/pizzas.json";
+        static string downloadFromPath = "https://www.olo.com/pizzass.json";
         static void Main(string[] args)
         {
 
@@ -21,22 +23,25 @@ namespace PizzaExercise_Console
 
 
             //2.GetTop20ToppingFromJsonData
-            if (isDownloadSuccessfull)
+            try
             {
                 IList<ToppingsCombination> result = repo.GetTopTwentyToppingCombination(filepath);
                 //3.Print the results
+                if(result!=null &&result.Count>0)
                 foreach (ToppingsCombination item in result)
                 {
                     Console.WriteLine(item.ToString());
                 }
             }
-            else
+            catch(Exception e)
             {
+                logger.Fatal($"url:{downloadFromPath} isDownloadSuccessfull:{isDownloadSuccessfull}");
                 Console.WriteLine("Download fail for Json file");
             }
 
             //3.exit
-            Console.ReadKey();
+            logger.Info("Application terminated. Press <enter> to exit...");
+            Console.ReadLine();
 
         }
     }
