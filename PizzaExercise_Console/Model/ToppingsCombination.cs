@@ -17,7 +17,7 @@ namespace PizzaExercise_Console.Model
             StringBuilder toppingCombination = new StringBuilder();
             foreach (string t in Toppings)
                 toppingCombination.Append(t + " ");
-            return ($"Rank:{Rank} Toppings:[{string.Join(",", Toppings)}]  Ordered:{AppearedInOrderCount} times");
+            return ($"Toppings:[{string.Join(",", Toppings)}] || Rank:{Rank} ||  Ordered:{AppearedInOrderCount} times");
         }
 
     }

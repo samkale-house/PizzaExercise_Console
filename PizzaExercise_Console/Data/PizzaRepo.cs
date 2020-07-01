@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace PizzaExercise_Console.Data
 {
+    /// <summary>
+    /// This class provides methods to interact and query with Json data and provide result
+    /// </summary>
     public class PizzaRepo
     {
         public IList<Order> GetAllDataFromJson(string filepath)
